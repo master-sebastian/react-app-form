@@ -1,0 +1,63 @@
+.ApplicationConfig__container{
+  width: 90%;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: #f8f9fa;
+  padding-bottom: 2.25rem;
+  margin-top: 0.25rem;
+  margin-bottom: 2.25rem;
+  
+}
+
+@media (min-width: 576px) {
+    .ApplicationConfig__container {
+        max-width: 540px;
+    }
+}
+@media (min-width: 768px) {
+    .ApplicationConfig__container {
+        max-width: 720px;
+    }
+}
+@media (min-width: 992px) {
+    .ApplicationConfig__container {
+        max-width: 960px;
+    }
+}
+@media (min-width: 1200px) {
+    .ApplicationConfig__container {
+        width: 50%;
+        max-width: 1140px;
+    }
+}
+@media (min-width: 1400px) {
+    .ApplicationConfig__container {
+        width: 50%;
+        max-width: 1320px;
+    }
+}
+
+.ApplicationConfig__row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    margin-top: 20px;
+    margin-right: calc(1.2rem * -.5);
+    margin-left: calc(1.2rem * -.5);
+    justify-content: center;
+}
+
+.ApplicationConfig__row > label {
+    padding: 5px;
+}
+
+.ApplicationConfig__text-center{
+    text-align: center ;
+}
+
+.ApplicationConfig__header-title{
+    color: white;
+    background-color: black;
+    margin: 0;
+    padding: 10px;
+}
