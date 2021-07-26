@@ -1,9 +1,10 @@
 import ApplicationConfig  from "./ApplicationConfig";
+import ApplicationConfig2  from "./ApplicationConfig2";
 
 function App() {
   return (
     <>
-      <ApplicationConfig/>
+      <ApplicationConfig2/>
     </>
   );
 }
