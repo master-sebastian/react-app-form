@@ -1,46 +1,46 @@
 import React, {useState , useEffect } from 'react'
-import { CONFIG_DATA } from '../config/components/ApplicationConfig'
+import { CONFIG_DATA, SchemaTypeCompany, SchemaFlow, SchemaAutoResponse } from '../config/components/ApplicationConfig'
 import '../styles/ApplicationConfig.css'
 
 function ApplicationConfig2 (){
 
-    const data = CONFIG_DATA
+    const data: SchemaTypeCompany[] = CONFIG_DATA
     
-    const [nameCompany, setNameCompany] = useState("")
-    const [typeCompany, setTypeCompany] = useState((data.length > 0)?data[0]._id.toString():"")
-    const [listTypeCompany, setListTypeCompany] = useState(CONFIG_DATA)
-    const [flow, setFlow] = useState("")
-    const [listFlow, setListFlow] = useState(null)
-    const [autoResponse, setAutoResponse] = useState("")
-    const [listAutoResponse, setListAutoResponse] = useState(null)
+    const [nameCompany, setNameCompany] = useState<string>("")
+    const [typeCompany, setTypeCompany] = useState<string>((data.length > 0)?data[0]._id.toString():"")
+    const [listTypeCompany, setListTypeCompany] = useState<SchemaTypeCompany[]>(data)
+    const [flow, setFlow] = useState<string>("")
+    const [listFlow, setListFlow] = useState<SchemaFlow[]|null>(null)
+    const [autoResponse, setAutoResponse] = useState<string>("")
+    const [listAutoResponse, setListAutoResponse] = useState<SchemaAutoResponse[]|null>(null)
 
     useEffect( () => {
         setListFlowFunctionality(typeCompany, listTypeCompany)
     }, []);
 
-    const setListFlowFunctionality = (typeCompany, listTypeCompany) => {
-        let tempFlow =  getFlow(typeCompany, listTypeCompany)
+    const setListFlowFunctionality = (typeCompany: string|number, listTypeCompany: SchemaTypeCompany[]) => {
+        let tempFlow: SchemaFlow[]|null =  getFlow(typeCompany, listTypeCompany)
         setListFlow(tempFlow)
         setFlowFunctionality(tempFlow)
     }
 
-    const setFlowFunctionality = (listFlow) => {
-        let tempFlow = (listFlow !== null && listFlow.length > 0)? listFlow[0]._id.toString():"" 
+    const setFlowFunctionality = (listFlow: SchemaFlow[]|null) => {
+        let tempFlow: string|null = (listFlow !== null && listFlow.length > 0)? listFlow[0]._id.toString():"" 
         setFlow(tempFlow)
         setListAutoResponseFunctionality(tempFlow, listFlow)
     }
 
-    const setListAutoResponseFunctionality = (flow, listFlow) => {
-        let tempListAutoResponse = getAutoResponse(flow, listFlow) 
+    const setListAutoResponseFunctionality = (flow: string, listFlow: SchemaFlow[]|null) => {
+        let tempListAutoResponse:SchemaAutoResponse[]|null = getAutoResponse(flow, listFlow) 
         setListAutoResponse(tempListAutoResponse)
         setAutoResponse((tempListAutoResponse !== null && tempListAutoResponse.length > 0)?tempListAutoResponse[0]._id.toString():"")
     }
 
-    const getFlow  = (idTypeCompany, listTypeCompany) => {
+    const getFlow  = (idTypeCompany: string|number, listTypeCompany: SchemaTypeCompany[]) => {
         if(idTypeCompany === ""){
             return null;
         }
-        idTypeCompany = parseInt(idTypeCompany)
+        idTypeCompany = parseInt(String(idTypeCompany))
         let result = listTypeCompany.filter(item => item._id === idTypeCompany)
         if(result.length === 0){
             return null;
@@ -48,33 +48,33 @@ function ApplicationConfig2 (){
         return result[0].flow;
     }
 
-    const getAutoResponse = (idFlow, listFlow) => {
-        if(idFlow === "" || listFlow === null || listFlow === undefined){
+    const getAutoResponse = (idFlow: string|null|number, listFlow: SchemaFlow[]|null) => {
+        if(idFlow === "" || listFlow === null){
             return null;
         }
-        idFlow = parseInt(idFlow)
+        idFlow = parseInt(String(idFlow))
         let result = listFlow.filter(item => item._id === idFlow)
         return result[0].autoResponse
     }
 
-    const handlerNameCompany = (event) => {
+    const handlerNameCompany = (event: React.ChangeEvent<HTMLInputElement>) => {
         setNameCompany(event.target.value);
     }
 
-    const handlerTypeCompany = (event) => {
-        let tempTypeCompany = event.target.value
+    const handlerTypeCompany = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        let tempTypeCompany: string = event.target.value
         
         setTypeCompany(tempTypeCompany);
         setListFlowFunctionality(tempTypeCompany, listTypeCompany)
     }
 
-    const handlerFlow = (event) => {
-        let tempFlow = event.target.value
+    const handlerFlow = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        let tempFlow: string = event.target.value
         setFlow(tempFlow)
         setListAutoResponseFunctionality(tempFlow, listFlow)
     }
 
-    const handlerAutoResponse = (event)=>{
+    const handlerAutoResponse = (event: React.ChangeEvent<HTMLSelectElement>)=>{
         setAutoResponse(event.target.value)
     }
 

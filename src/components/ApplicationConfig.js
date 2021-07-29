@@ -1,5 +1,5 @@
 import React from 'react'
-import { CONFIG_DATA } from '../config/components/ApplicationConfig'
+import { CONFIG_DATA } from '../config/components/ApplicationConfig.ts'
 import '../styles/ApplicationConfig.css'
 
 class ApplicationConfig extends React.Component{

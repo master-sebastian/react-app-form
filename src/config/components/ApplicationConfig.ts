@@ -1,4 +1,21 @@
-export const CONFIG_DATA = [
+export interface SchemaAutoResponse {
+    _id: number,
+    text: string
+}
+
+export interface SchemaFlow {
+    _id: number,
+    text: string,
+    autoResponse: SchemaAutoResponse[] | null 
+}
+
+export interface SchemaTypeCompany {
+    _id: number,
+    text: string,
+    flow : SchemaFlow[]
+}
+
+export const CONFIG_DATA : SchemaTypeCompany[] = [
     {
         _id: 1 ,
         text:"Delivery", 
